@@ -1,0 +1,51 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: deployer
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+      manifest:
+        type: string
+        required: true
+
+jobs:
+  demo_prep_prod_001-demo-artifact_0_0_3:
+    if: ${{ fromJSON(inputs.manifest)['demo_prep_prod_001']['demo-artifact:0.0.3'].deploy }}
+    uses: mluzcabrera/demo_prep_prod_001/.cloudbees/workflows/deploy.yaml
+    with:
+      artifact-id: ${{ fromJSON(inputs.manifest)['demo_prep_prod_001']['demo-artifact:0.0.3'].id }}
+      environment: ${{ inputs.environment }}
+  demo_prep_prod_001-demo-artifact_0_0_7:
+    if: ${{ fromJSON(inputs.manifest)['demo_prep_prod_001']['demo-artifact:0.0.7'].deploy }}
+    uses: mluzcabrera/demo_prep_prod_001/.cloudbees/workflows/deploy.yaml
+    with:
+      artifact-id: ${{ fromJSON(inputs.manifest)['demo_prep_prod_001']['demo-artifact:0.0.7'].id }}
+      environment: ${{ inputs.environment }}
+  demo_prep_prod_001-demo-artifact_0_0_9:
+    if: ${{ fromJSON(inputs.manifest)['demo_prep_prod_001']['demo-artifact:0.0.9'].deploy }}
+    uses: mluzcabrera/demo_prep_prod_001/.cloudbees/workflows/deploy.yaml
+    with:
+      artifact-id: ${{ fromJSON(inputs.manifest)['demo_prep_prod_001']['demo-artifact:0.0.9'].id }}
+      environment: ${{ inputs.environment }}
+  gl_demo_prep_prod_001-demo-artifact_0_0_3:
+    if: ${{ fromJSON(inputs.manifest)['gl_demo_prep_prod_001']['demo-artifact:0.0.3'].deploy }}
+    uses: saassre/gl_demo_prep_prod_001/.cloudbees/workflows/deploy.yaml
+    with:
+      artifact-id: ${{ fromJSON(inputs.manifest)['gl_demo_prep_prod_001']['demo-artifact:0.0.3'].id }}
+      environment: ${{ inputs.environment }}
+  gl_demo_prep_prod_001-demo-artifact_0_0_4:
+    if: ${{ fromJSON(inputs.manifest)['gl_demo_prep_prod_001']['demo-artifact:0.0.4'].deploy }}
+    uses: saassre/gl_demo_prep_prod_001/.cloudbees/workflows/deploy.yaml
+    with:
+      artifact-id: ${{ fromJSON(inputs.manifest)['gl_demo_prep_prod_001']['demo-artifact:0.0.4'].id }}
+      environment: ${{ inputs.environment }}
+  gl_demo_prep_prod_001-demo-artifact_0_0_5:
+    if: ${{ fromJSON(inputs.manifest)['gl_demo_prep_prod_001']['demo-artifact:0.0.5'].deploy }}
+    uses: saassre/gl_demo_prep_prod_001/.cloudbees/workflows/deploy.yaml
+    with:
+      artifact-id: ${{ fromJSON(inputs.manifest)['gl_demo_prep_prod_001']['demo-artifact:0.0.5'].id }}
+      environment: ${{ inputs.environment }}
